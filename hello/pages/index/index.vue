@@ -7,20 +7,18 @@
 	</view>
 </template>
 
-<script>
-	export default {
-		data() {
-			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
+<script setup>
+	import { ref, onMounted } from 'vue'
+	import { onShow, onHide, onUnload, onLoad, onReady } from '@dcloudio/uni-app';
 
-		},
-		methods: {
-
-		}
-	}
+	const title = ref('Hello')
+	onLoad(() => {
+		console.log('onLoad')
+	})
+	
+	onMounted(() => {
+		console.log('onMounted')
+	})
 </script>
 
 <style>
