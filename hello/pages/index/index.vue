@@ -4,6 +4,9 @@
 		<view class="text-area">
 			<text class="title">{{title}}</text>
 		</view>
+		
+		<button @click="avatarShakePage">avatarShakePage</button>
+		<button @click="buttonClickTapPage">buttonClickTapPage</button>
 	</view>
 </template>
 
@@ -19,6 +22,20 @@
 	onMounted(() => {
 		console.log('onMounted')
 	})
+
+	const avatarShakePage = () => {
+		console.log("avatarShakePage")
+		uni.navigateTo({
+			url: '/pages/avatarShake/avatarShake'
+		})
+	}
+
+	const buttonClickTapPage = () => {
+		console.log("buttonClickTapPage")
+		uni.navigateTo({
+			url: '/pages/buttonClickTap/buttonClickTap'
+		})
+	}
 </script>
 
 <style>
