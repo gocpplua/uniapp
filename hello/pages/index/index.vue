@@ -7,6 +7,7 @@
 		
 		<button @click="avatarShakePage">avatarShakePage</button>
 		<button @click="buttonClickTapPage">buttonClickTapPage</button>
+		<button @click="customClickDoubleLongpressPage">customClickDoubleLongpressPage</button>
 	</view>
 </template>
 
@@ -34,6 +35,13 @@
 		console.log("buttonClickTapPage")
 		uni.navigateTo({
 			url: '/pages/buttonClickTap/buttonClickTap'
+		})
+	}
+
+	const customClickDoubleLongpressPage = () => {
+		console.log("customClickDoubleLongpressPage")
+		uni.navigateTo({
+			url: '/pages/customclickdoublelongpress/customclickdoublelongpress'
 		})
 	}
 </script>

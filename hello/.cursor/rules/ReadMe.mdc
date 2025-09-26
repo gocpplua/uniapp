@@ -1,0 +1,128 @@
+---
+description: UniApp 跨平台事件处理演示项目 - 包含单击、双击、长按等触摸事件的实现和平台差异测试
+globs:
+alwaysApply: true
+---
+
+# UniApp 跨平台事件处理演示项目
+
+## 项目概述
+
+这是一个基于 UniApp 框架开发的跨平台事件处理演示项目，主要用于研究和测试不同平台（H5、小程序）下的事件处理机制差异，特别是触摸事件的实现方式。
+
+## 主要功能
+
+### 1. 事件处理演示页面
+
+- **首页 (index)**: 项目导航入口，包含三个功能页面的跳转按钮
+- **头像摇动页面 (avatarShake)**: 演示双击事件的平台差异
+- **按钮点击测试页面 (buttonClickTap)**: 测试 click 和 tap 事件的触发顺序和冒泡行为
+- **自定义点击双击长按页面 (customclickdoublelongpress)**: 完整的自定义事件处理实现
+
+### 2. 核心组件
+
+#### useDoubleClick Composable
+位于 `composables/useDoubleClick.js`，提供统一的跨平台事件处理方案：
+
+- **单击检测**: 延迟判断机制，避免误触双击
+- **双击检测**: 可配置双击间隔时间
+- **长按检测**: 可配置长按触发时间
+- **跨平台兼容**: 同时支持触摸事件和点击事件
+- **状态管理**: 完整的触摸状态跟踪和清理
+
+### 3. 平台差异文档
+
+项目包含详细的平台事件差异对比表格 (`doc/component/组件事件差异表格.md`)，涵盖：
+
+- **基础组件**: view、text、image 等的事件支持对比
+- **表单组件**: button、input、textarea 等的平台差异
+- **媒体组件**: video、audio 的事件处理差异
+- **滚动组件**: scroll-view、swiper 的特殊事件
+- **最佳实践**: 事件处理、性能优化、兼容性方案
+
+## 技术栈
+
+- **框架**: UniApp (Vue 3)
+- **开发语言**: JavaScript
+- **平台支持**: H5、微信小程序
+- **构建工具**: HBuilderX / CLI
+
+## 项目结构
+
+```
+├── composables/           # 可复用逻辑
+│   └── useDoubleClick.js  # 双击事件处理 Composable
+├── pages/                 # 页面文件
+│   ├── index/            # 首页
+│   ├── avatarShake/      # 头像摇动页面
+│   ├── buttonClickTap/   # 按钮点击测试页面
+│   └── customclickdoublelongpress/  # 自定义事件页面
+├── static/               # 静态资源
+├── doc/                  # 项目文档
+│   └── component/        # 组件事件差异表格
+└── unpackage/           # 编译输出目录
+```
+
+## 核心特性
+
+### 1. 跨平台事件统一处理
+- 自动识别平台差异
+- 统一的事件处理接口
+- 完整的触摸状态管理
+
+### 2. 平台差异测试
+- H5 与小程序事件触发顺序对比
+- 事件冒泡行为测试
+- 双击事件支持差异验证
+
+### 3. 可配置的事件参数
+- 双击间隔时间自定义
+- 长按触发时间自定义
+- 事件回调函数灵活配置
+
+## 使用说明
+
+### 基本用法
+
+```javascript
+import { useDoubleClick } from '@/composables/useDoubleClick.js'
+
+const handlers = useDoubleClick({
+  delay: 300,              // 双击间隔时间
+  longPressDelay: 800,     // 长按触发时间
+  onSingleClick: (event) => {
+    console.log('单击')
+  },
+  onDoubleClick: (event) => {
+    console.log('双击')
+  },
+  onLongPress: (event) => {
+    console.log('长按')
+  }
+})
+```
+
+### 在模板中使用
+
+```vue
+<template>
+  <view v-bind="handlers">
+    点击、双击或长按我
+  </view>
+</template>
+```
+
+## 开发注意事项
+
+1. **事件兼容性**: 小程序不支持 dblclick 事件，需要自定义实现
+2. **事件冒泡**: 不同平台的事件冒泡行为存在差异
+3. **性能优化**: 高频事件需要适当的节流和防抖处理
+4. **状态清理**: 组件卸载时需要清理定时器，避免内存泄漏
+
+## 贡献指南
+
+本项目主要用于学习和研究跨平台事件处理，欢迎提交 Issue 和 Pull Request 来完善功能或修复问题。
+
+## 许可证
+
+MIT License
